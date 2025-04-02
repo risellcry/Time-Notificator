@@ -22,16 +22,14 @@ int main()
     }
     while (true)
     {
-        time_t raw;
-        struct tm *info;
+        time_t raw = time(NULL);
+        struct tm *info = localtime(&raw);
         int rhr = info -> tm_hour;
         int rmn = info -> tm_min;
         for (int i = 0; i < 8; i++)
         {
             if ((hrs[i] != 0 && mns[i] != 0) && (rhr <= hrs[i] && rmn <= mns[i]))
             {
-                time(&raw);
-                info = localtime(&raw);
                 while (true)
                 {
                     rhr = info -> tm_hour;
@@ -40,6 +38,10 @@ int main()
                     {
                         printf("Completed to Notify Service #%d ...\n", i + 1);
                         break;
+                    }
+                    else
+                    {
+                        printf("%d:%d\n", hrs[i], mns[i]);
                     }
                 }
             }
